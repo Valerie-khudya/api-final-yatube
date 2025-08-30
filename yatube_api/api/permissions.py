@@ -12,13 +12,11 @@ class CrudPermission(permissions.BasePermission):
             return True
         elif request.user.is_authenticated:
             return obj.author == request.user
-        else:
-            return False
+        return False
 
 
 class GroupPermission(permissions.BasePermission):
     def has_permission(self, request, view):
         if request.method in permissions.SAFE_METHODS:
             return True
-        else:
-            return status.HTTP_405_METHOD_NOT_ALLOWED
+        return status.HTTP_405_METHOD_NOT_ALLOWED
